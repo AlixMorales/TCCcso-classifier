@@ -1,6 +1,7 @@
 import os
 from openai import OpenAI
 from dotenv import load_dotenv
+import time
 
 # Load .env variables (to keep the API key secure)
 load_dotenv()
@@ -27,20 +28,32 @@ def classify_provision(provision_text):
 
     {{
     "provision": "{provision_text}",
-    "matched_matrix_provision": "Closest concept or keyword from matrix",
+    "matched_matrix_provision": "Closest concept from matrix, as it appears in the matrix.",
     "subgroup": "Formation | Governance | Operations | Resources",
     "type": "Restrictive | Permissive",
     "explanation": "Brief legal reasoning and justification based on the matrix."
     }}
     """
 
+    start_time = time.time()
+
     response = client.chat.completions.create(
-        model="gpt-4-turbo",
+        model="gpt-4o",
         messages=[
             {"role": "system", "content": "You are a legal classification assistant trained in civil society regulation. Use the CSO Regulatory Matrix to classify provisions deterministically and return structured output. Do not create new categories or speculate beyond the matrix."},
             {"role": "user", "content": prompt}
         ],
         temperature=0.2
     )
+
+    end_time = time.time()
+    duration = round(end_time - start_time, 2)
+
+    usage = response.usage
+    print("\nToken Usage:")
+    print(f"Prompt tokens: {usage.prompt_tokens}")
+    print(f"Completion tokens: {usage.completion_tokens}")
+    print(f"Total tokens: {usage.total_tokens}")
+    print(f"Execution time: {duration} seconds\n")
 
     return response.choices[0].message.content
