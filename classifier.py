@@ -39,10 +39,12 @@ def classify_provision(provision_text):
 
     response = client.responses.create(
         model="gpt-4o",
-        input=[
-            {"role": "system", "content": "You are a legal classification assistant trained in civil society regulation. Use the CSO Regulatory Matrix to classify provisions deterministically and return structured output. Do not create new categories or speculate beyond the matrix."},
-            {"role": "user", "content": prompt}
-        ],
+        instructions=(
+            "You are a legal classification assistant trained in civil society regulation. "
+            "Read the input prompt carefully and follow all formatting instructions. "
+            "Do not speculate beyond the matrix provided in the prompt."
+        ),
+        input= prompt,
         temperature=0.2
     )
 
