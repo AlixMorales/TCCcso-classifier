@@ -37,9 +37,9 @@ def classify_provision(provision_text):
 
     start_time = time.time()
 
-    response = client.chat.completions.create(
+    response = client.responses.create(
         model="gpt-4o",
-        messages=[
+        input=[
             {"role": "system", "content": "You are a legal classification assistant trained in civil society regulation. Use the CSO Regulatory Matrix to classify provisions deterministically and return structured output. Do not create new categories or speculate beyond the matrix."},
             {"role": "user", "content": prompt}
         ],
@@ -51,9 +51,9 @@ def classify_provision(provision_text):
 
     usage = response.usage
     print("\nToken Usage:")
-    print(f"Prompt tokens: {usage.prompt_tokens}")
-    print(f"Completion tokens: {usage.completion_tokens}")
+    print(f"Input tokens: {usage.input_tokens}")
+    print(f"Output tokens: {usage.output_tokens}")
     print(f"Total tokens: {usage.total_tokens}")
     print(f"Execution time: {duration} seconds\n")
 
-    return response.choices[0].message.content
+    return response.output_text
