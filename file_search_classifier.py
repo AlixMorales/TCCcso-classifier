@@ -31,17 +31,31 @@ def classify_with_file_search(pdf_path, matrix_path, output_path=None):
     response = client.responses.create(
         model="gpt-4o",
         instructions=(
-            "You are a legal assistant trained in CSO regulation. "
-            "Use the file search tool to classify provisions from the PDF using the matrix as reference. "
-            "For each provision, return: 'provision', 'matched_matrix_provision', 'subgroup', 'type', and 'explanation'."
+            "You are a legal classification assistant trained in civil society regulation. "
+            "Use the File Search tool to read the uploaded documents. "
+            "Use the CSO Regulatory Regime Matrix as reference to classify legal provisions found in the PDF. "
+            "Find the closest matching concept. If no exact match exists, choose the conceptually closest category.\n\n"
+            "Classify each provision as either:\n"
+            "- Restrictive: if it imposes barriers or burdens on CSO activity.\n"
+            "- Permissive: if it enables, supports, or simplifies CSO activity.\n\n"
+            "Assign the provision to one of the four CSO Matrix subgroups: Formation, Governance, Operations, Resources.\n"
+            "Once assigned, do not change the category.\n\n"
+            "Return a JSON object for each provision like this:\n\n"
+            "{\n"
+            "\"provision\": \"...\",\n"
+            "\"matched_matrix_provision\": \"Closest concept from matrix, as it appears in the matrix.\",\n"
+            "\"subgroup\": \"Formation | Governance | Operations | Resources\",\n"
+            "\"type\": \"Restrictive | Permissive\",\n"
+            "\"explanation\": \"Brief legal reasoning and justification based on the matrix.\"\n"
+            "}"
         ),
         tools=[{
             "type": "file_search",
             "vector_store_ids": [vector_store_id]
         }],
         input=(
-            "Classify the provisions found in the PDF file using the CSO Matrix as reference. "
-            "Provide a JSON result per provision."
+            "Read the uploaded PDF and classify each legal provision using the CSO Matrix also uploaded. "
+            "Return results in JSON as described in the instructions."
         ),
         temperature=0.2
     )
