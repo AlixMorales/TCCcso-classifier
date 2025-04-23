@@ -1,1 +1,73 @@
-"Here are the classifications of the legal provisions found in the Kenya Public Order Act:\n\n```json\n[\n    {\n        \"provision\": \"Prohibition of uniforms, etc., in connexion with political objects\",\n        \"matched_matrix_provision\": \"RESTRICTIVE PROVISION 1. [CSOs] [must not] [operate as informal, voluntary associations] and instead must register with the government [or else face penalty for non-compliance]\",\n        \"subgroup\": \"Formation\",\n        \"type\": \"Restrictive\",\n        \"explanation\": \"This provision restricts the wearing of uniforms connected to political objects, similar to prohibiting informal operations without registration.\"\n    },\n    {\n        \"provision\": \"Regulation of Public meeting and Processions\",\n        \"matched_matrix_provision\": \"RESTRICTIVE PROVISION 1. [CSOs] [must] [obtain government permission, “permits”, for individual projects] [after law’s commencement] [or else face penalty for non-compliance]\",\n        \"subgroup\": \"Operations\",\n        \"type\": \"Restrictive\",\n        \"explanation\": \"This provision requires notification and permission for public meetings, akin to needing permits for projects.\"\n    },\n    {\n        \"provision\": \"Curfew orders\",\n        \"matched_matrix_provision\": \"RESTRICTIVE PROVISION 1. [CSOs] [must] [comply with agency’s interference regarding external operations or prescribed coordination across multiple CSOs]\",\n        \"subgroup\": \"Operations\",\n        \"type\": \"Restrictive\",\n        \"explanation\": \"Curfew orders impose restrictions on movement, similar to compliance with agency interference.\"\n    },\n    {\n        \"provision\": \"Possession of offensive weapon in public place\",\n        \"matched_matrix_provision\": \"RESTRICTIVE PROVISION 1. [CSOs] [must not] [engage in specified activities] such as activism [if it receives foreign funds that exceed a threshold]\",\n        \"subgroup\": \"Operations\",\n        \"type\": \"Restrictive\",\n        \"explanation\": \"This provision restricts carrying weapons in public, akin to prohibiting certain activities under specific conditions.\"\n    }\n]\n```\n\nThese classifications are based on the closest conceptual matches from the CSO Regulatory Regime Matrix."
+Here are the extracted provisions from the PDF along with their classifications based on the CSO Regulatory Regime Matrix:
+
+1. **Provision:**
+   "An issuer shall treat a person, other than one described in section 48, as being entitled to exercise the rights and privileges attached to a debt obligation if the person provides proof that the person has acquired ownership of the debt obligation by operation of law or has legal authority to exercise the rights and privileges."
+
+   **Classification:**
+   ```json
+   {
+     "provision": "An issuer shall treat a person, other than one described in section 48, as being entitled to exercise the rights and privileges attached to a debt obligation if the person provides proof that the person has acquired ownership of the debt obligation by operation of law or has legal authority to exercise the rights and privileges.",
+     "matched_matrix_provision": "[CSOs] [must] [provide information on its financial matters] such as financing agreements, contracts, or employee salaries [when the regulating agency requests] [or else face penalty for non-compliance]",
+     "subgroup": "Resources",
+     "type": "Restrictive",
+     "explanation": "This provision requires proof of ownership to exercise rights, similar to requiring CSOs to provide financial information upon request."
+   }
+   ```
+
+2. **Provision:**
+   "If satisfactory proof of the death of a joint holder of a debt obligation with a right of survivorship is provided to an issuer, the issuer may treat any surviving joint holder as the owner of the debt obligation."
+
+   **Classification:**
+   ```json
+   {
+     "provision": "If satisfactory proof of the death of a joint holder of a debt obligation with a right of survivorship is provided to an issuer, the issuer may treat any surviving joint holder as the owner of the debt obligation.",
+     "matched_matrix_provision": "[CSOs] [may] [appeal decisions that disadvantage their positioning on financial and non-financial matters]",
+     "subgroup": "Resources",
+     "type": "Permissive",
+     "explanation": "This provision allows for the transfer of ownership upon proof of death, similar to allowing appeals on financial decisions."
+   }
+   ```
+
+3. **Provision:**
+   "An issuer is not required to inquire into the existence of, or see to the performance of, any duty owed to a third person by a registered holder, or a person who may be treated as a registered holder, of a debt obligation."
+
+   **Classification:**
+   ```json
+   {
+     "provision": "An issuer is not required to inquire into the existence of, or see to the performance of, any duty owed to a third person by a registered holder, or a person who may be treated as a registered holder, of a debt obligation.",
+     "matched_matrix_provision": "[Agency] [must not] [regulate CSOs without oversight]",
+     "subgroup": "Governance",
+     "type": "Permissive",
+     "explanation": "This provision limits the issuer's responsibilities, akin to limiting agency oversight without proper procedures."
+   }
+   ```
+
+4. **Provision:**
+   "If a minor exercises a right of ownership in a debt obligation of an issuer, no subsequent repudiation or avoidance or, in Quebec, nullity or reduction of obligations is effective against the issuer."
+
+   **Classification:**
+   ```json
+   {
+     "provision": "If a minor exercises a right of ownership in a debt obligation of an issuer, no subsequent repudiation or avoidance or, in Quebec, nullity or reduction of obligations is effective against the issuer.",
+     "matched_matrix_provision": "[CSOs] [must] [comply with agency’s interference regarding external operations]",
+     "subgroup": "Operations",
+     "type": "Restrictive",
+     "explanation": "This provision enforces the validity of actions taken by minors, similar to requiring compliance with agency directives."
+   }
+   ```
+
+5. **Provision:**
+   "Subject to any applicable law relating to the collection of taxes, a person who is an heir or a fiduciary of an estate or succession of a deceased debt obligation holder is entitled to become the registered holder or to designate a registered holder if the person deposits the following information with the issuer or its transfer agent, together with any reasonable assurances that the issuer may require."
+
+   **Classification:**
+   ```json
+   {
+     "provision": "Subject to any applicable law relating to the collection of taxes, a person who is an heir or a fiduciary of an estate or succession of a deceased debt obligation holder is entitled to become the registered holder or to designate a registered holder if the person deposits the following information with the issuer or its transfer agent, together with any reasonable assurances that the issuer may require.",
+     "matched_matrix_provision": "[CSOs] [must] [acquire government approval for each financial transaction or project]",
+     "subgroup": "Resources",
+     "type": "Restrictive",
+     "explanation": "This provision requires documentation and assurances for registration, similar to needing approval for financial transactions."
+   }
+   ```
+
+These classifications are based on the closest matches found in the CSO Regulatory Regime Matrix .

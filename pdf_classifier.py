@@ -11,14 +11,25 @@ def extract_provisions_from_pdf(pdf_path):
         full_text += page.get_text()
 
     # Extract numbered sections like "3.", "4.", etc.
-    pattern = r"\n(\d{1,2}\.)\s+(.*?)(?=\n\d{1,2}\.\s+|PART|\Z)"
+    pattern = r"\n(\d{1,2})\.\s{1,5}(.*?)(?=\n\d{1,2}\.\s+|PART|\Z)" #Kenya
+    #pattern=r"\n((\d{1,3}(\s*\(\d{0,2}\))?))\s+(.*?)(?=\n\d{1,3}(\s*\(\d{0,2}\))?\s+|PART\s|\Z)" #Canada
     matches = re.findall(pattern, full_text, re.DOTALL)
 
     provisions = []
+    #Kenya
     for section_number, text in matches:
         cleaned = text.strip()
         if len(cleaned) > 50:
             provisions.append(cleaned)
+    """
+    #Canada
+    for match in matches:
+        section_number = match[0]  # full number like "3 (1)"
+        text = match[3]            # actual provision text
+        cleaned = " ".join(text.strip().splitlines())
+        if len(cleaned) > 50:
+            provisions.append(f"{section_number}. {cleaned}")"""
+
 
     return provisions
 

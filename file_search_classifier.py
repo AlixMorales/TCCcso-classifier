@@ -61,16 +61,10 @@ def classify_with_file_search(pdf_path, matrix_path, output_path=None):
     print(response.output_text)
 
     if output_path:
-        try:
-            result_json = json.loads(response.output_text)
-            with open(output_path, "w", encoding="utf-8") as f:
-                json.dump(result_json, f, indent=4, ensure_ascii=False)
-        except Exception as e:
-            print("Could not parse JSON:", e)
-            print("Saving raw output instead.")
-            with open(output_path, "w", encoding="utf-8") as f:
-                f.write(response.output_text)
-        print(f"\nResults saved to {output_path}")
+        with open(output_path, "w", encoding="utf-8") as f:
+            f.write(response.output_text)
+        print(f"\nResponse saved to {output_path}")
+
 
 
 if __name__ == "__main__":
