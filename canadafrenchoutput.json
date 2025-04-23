@@ -1,0 +1,63 @@
+Let's extract and classify the provisions from the PDF using the CSO Regulatory Regime Matrix.
+
+### Provision 1
+
+```json
+{
+  "provision": "3 (1) La présente loi s’applique aux organisations et, dans la mesure prévue à la partie 19, aux personnes morales sans capital-actions constituées par une loi spéciale du Parlement.",
+  "matched_matrix_provision": "[CSOs] [must] [operate as formal organizations] [after law’s commencement] [or else face penalty for non-compliance]",
+  "subgroup": "Formation",
+  "type": "Restrictive",
+  "explanation": "This provision mandates that organizations must operate under the law, aligning with the matrix's requirement for formal operation."
+}
+```
+
+### Provision 2
+
+```json
+{
+  "provision": "Restrictions — activités commerciales (3) Les organisations ne peuvent se livrer aux activités des banques, des associations régies par la Loi sur les associations coopératives de crédit, des sociétés ou sociétés de secours régies par la Loi sur les sociétés d’assurances ou des sociétés régies par la Loi sur les sociétés de fiducie et de prêt.",
+  "matched_matrix_provision": "[CSOs] [must not] [engage in specified activities] such as banking or insurance [or else face penalty for non-compliance]",
+  "subgroup": "Operations",
+  "type": "Restrictive",
+  "explanation": "This provision restricts organizations from engaging in specific commercial activities, similar to the matrix's restrictions on specified activities."
+}
+```
+
+### Provision 3
+
+```json
+{
+  "provision": "4 La présente loi a pour objet de permettre la constitution ou la prorogation de personnes morales — y compris celles constituées ou prorogées sous le régime d’une autre loi fédérale — sous forme d’organisations sans capital-actions en vue de l’exercice d’activités licites.",
+  "matched_matrix_provision": "[CSOs] [may] [be formed or continued as legal entities] [after law’s commencement] [or else choose not to be formalized]",
+  "subgroup": "Formation",
+  "type": "Permissive",
+  "explanation": "This provision allows for the formation or continuation of organizations, aligning with the matrix's permissive stance on legal entity formation."
+}
+```
+
+### Provision 4
+
+```json
+{
+  "provision": "6 (1) La constitution de l’organisation est subordonnée à la signature de statuts constitutifs et à l’observation de l’article 8 par une ou plusieurs personnes physiques ou morales.",
+  "matched_matrix_provision": "[CSOs] [must] [identify minimum number of founders or members] [or else the CSO is ineligible for registration or reregistration]",
+  "subgroup": "Formation",
+  "type": "Restrictive",
+  "explanation": "This provision requires a formal constitution process, similar to the matrix's requirement for identifying founders."
+}
+```
+
+### Provision 5
+
+```json
+{
+  "provision": "Restrictions — droit d’exercer ou de régir certaines activités (4) La constitution ou la prorogation sous le régime de la présente loi n’a pas pour effet de conférer à l’organisation le droit d’exercer l’activité d’un établissement d’enseignement autorisé à délivrer des diplômes universitaires ou celui de régir l’exercice d’une activité, notamment une profession.",
+  "matched_matrix_provision": "[CSOs] [must not] [engage in specified activities] such as education or professional regulation [or else face penalty for non-compliance]",
+  "subgroup": "Operations",
+  "type": "Restrictive",
+  "explanation": "This provision restricts organizations from engaging in educational or professional regulatory activities, aligning with the matrix's restrictions on specified activities."
+}
+```
+
+These classifications are based on the closest matches found in the CSO Regulatory Regime Matrix.

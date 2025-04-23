@@ -4,7 +4,7 @@ import json
 from dotenv import load_dotenv
 from openai import OpenAI
 
-# Load .env variables
+# Load key from .env file (to keep the API key secure)
 load_dotenv()
 client = OpenAI(api_key=os.getenv("api_key"))
 
@@ -31,31 +31,27 @@ def classify_with_file_search(pdf_path, matrix_path, output_path=None):
     response = client.responses.create(
         model="gpt-4o",
         instructions=(
-            "You are a legal classification assistant trained in civil society regulation. "
-            "Use the File Search tool to read the uploaded documents. "
-            "Use the CSO Regulatory Regime Matrix as reference to classify legal provisions found in the PDF. "
-            "Find the closest matching concept. If no exact match exists, choose the conceptually closest category.\n\n"
-            "Classify each provision as either:\n"
-            "- Restrictive: if it imposes barriers or burdens on CSO activity.\n"
-            "- Permissive: if it enables, supports, or simplifies CSO activity.\n\n"
-            "Assign the provision to one of the four CSO Matrix subgroups: Formation, Governance, Operations, Resources.\n"
-            "Once assigned, do not change the category.\n\n"
-            "Return a JSON object for each provision like this:\n\n"
-            "{\n"
-            "\"provision\": \"...\",\n"
-            "\"matched_matrix_provision\": \"Closest concept from matrix, as it appears in the matrix.\",\n"
-            "\"subgroup\": \"Formation | Governance | Operations | Resources\",\n"
-            "\"type\": \"Restrictive | Permissive\",\n"
-            "\"explanation\": \"Brief legal reasoning and justification based on the matrix.\"\n"
-            "}"
+        "You are a legal classification assistant trained in civil society regulation.\n"
+        "Always use the File Search tool to read the uploaded PDF and CSO Matrix documents.\n"
+        "Use the CSO Regulatory Regime Matrix to classify legal provisions found in the PDF.\n"
+        "Do not speculate or invent categories beyond what is in the matrix.\n"
+        "Return output in structured JSON as specified in the task."
         ),
         tools=[{
             "type": "file_search",
             "vector_store_ids": [vector_store_id]
         }],
         input=(
-            "Read the uploaded PDF and classify each legal provision using the CSO Matrix also uploaded. "
-            "Return results in JSON as described in the instructions."
+        "Read the uploaded PDF. For every numbered section (e.g., 1., 2., 3., etc.), extract the text as a legal provision.\n"
+        "Classify each provision using the CSO Regulatory Regime Matrix (also uploaded).\n"
+        "Do not skip short sections. Return one JSON object per provision, like:\n\n"
+        "{\n"
+        '  "provision": "provision exactly as it appears in the PDF",\n'
+        '  "matched_matrix_provision": "Closest concept from matrix, as it appears in the matrix.",\n'
+        '  "subgroup": "Formation | Governance | Operations | Resources",\n'
+        '  "type": "Restrictive | Permissive",\n'
+        '  "explanation": "Brief legal reasoning and justification based on the matrix."\n'
+        "}"
         ),
         temperature=0.2
     )
@@ -65,9 +61,17 @@ def classify_with_file_search(pdf_path, matrix_path, output_path=None):
     print(response.output_text)
 
     if output_path:
-        with open(output_path, "w", encoding="utf-8") as f:
-            json.dump(response.output_text, f, indent=4, ensure_ascii=False)
+        try:
+            result_json = json.loads(response.output_text)
+            with open(output_path, "w", encoding="utf-8") as f:
+                json.dump(result_json, f, indent=4, ensure_ascii=False)
+        except Exception as e:
+            print("Could not parse JSON:", e)
+            print("Saving raw output instead.")
+            with open(output_path, "w", encoding="utf-8") as f:
+                f.write(response.output_text)
         print(f"\nResults saved to {output_path}")
+
 
 if __name__ == "__main__":
     if len(sys.argv) < 3:

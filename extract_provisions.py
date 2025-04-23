@@ -24,4 +24,4 @@ if __name__ == "__main__":
 
     print(f"\n Extracted {len(provisions)} provisions:\n")
     for i, provision in enumerate(provisions, 1):
-        print(f"🔹 Provision {i}:\n{provision}\n{'-'*80}\n")
+        print(f"Provision {i}:\n{provision}\n{'-'*80}\n")
