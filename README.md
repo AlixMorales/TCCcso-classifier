@@ -1,5 +1,5 @@
 # CSO Provision Classifier
-This project extracts and classifies legal provisions from international nonprofit laws using a hybrid approach combining manual control, OpenAI's GPT models, and the CSO Regulatory Regime Matrix. It supports cross-jurisdictional legal analysis and is structured to be modular and easy to extend.
+This project extracts and classifies legal provisions from international nonprofit laws using a hybrid approach combining manual control, OpenAI's GPT models, and the CSO Regulatory Regime Matrix.
 
 ## Purpose
 To automatically classify legal provisions from international nonprofit-related laws according to permissiveness vs. restrictiveness and their subgroup (formation, governance, operations, resources). The classification is grounded in the CSO Matrix typology, which is stored in data/cso-matrix.txt and used during inference via the OpenAI responses.create() API.
