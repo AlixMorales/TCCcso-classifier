@@ -1,6 +1,12 @@
+import sys
 from classifier import classify_provision
 
 if __name__ == "__main__":
-    provision = "A public benefit organization may determine its own internal governance structure in accordance with its constitution and bylaws"
-    result = classify_provision(provision)
+    if len(sys.argv) < 2:
+        print("Usage: python main.py \"Your provision text here\"")
+        sys.exit(1)
+
+    provision_text = sys.argv[1]
+    result = classify_provision(provision_text)
+
     print("Classification Result:\n", result)
