@@ -56,7 +56,8 @@ To get started, you need a copy of this project on your computer.
 
     ```
     git clone https://github.com/raulpzs/cso-classifier.git
-    cd cso-classifer
+    cd cso-classifier 
+    ```
 
 - Option B: If you don't have Git installed
 
