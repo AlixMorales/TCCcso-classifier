@@ -11,7 +11,7 @@ load_dotenv()
 client = OpenAI(api_key=os.getenv("api_key"))
 
 # Load extracted provisions
-df = pd.read_csv("outputs/provisions_from_spacing.csv")
+df = pd.read_csv("outputs/provisions_from_spacing_3.csv")
 df["label"] = ""
 df["explanation"] = ""
 
@@ -72,14 +72,16 @@ for i, row in df.iterrows():
         print(f"Raw output at row {i}:\n{response.output}\n")
 
         
-        parsed = json.loads(response.output[0].content[0].text)
+        # Safe parsing
+        if response.output and response.output[0].content:
+            raw_text = response.output[0].content[0].text
+            parsed = json.loads(raw_text)
 
-        df.at[i, "label"] = parsed["label"]
-        df.at[i, "explanation"] = parsed["explanation"]
+            df.at[i, "label"] = parsed.get("label", "")
+            df.at[i, "explanation"] = parsed.get("explanation", "")
+        else:
+            raise ValueError("Empty response content")
         
-
-
-
     except Exception as e:
         print(f"Error at row {i}: {e}")
         df.at[i, "label"] = ""
