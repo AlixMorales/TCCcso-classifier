@@ -4,6 +4,7 @@ import time
 import pandas as pd
 from dotenv import load_dotenv
 from openai import OpenAI
+import datetime
 
 # Load API key
 load_dotenv()
@@ -61,12 +62,13 @@ for i, row in df.iterrows():
 
     except Exception as e:
         print(f"Error at row {i}: {e}")
-        df.at[i, "label"] = "error"
+        df.at[i, "label"] = ""
         df.at[i, "explanation"] = str(e)
 
     time.sleep(1.2)  # Stay within rate limits
 
-# Save output
-output_path = "outputs/filtered_provision.csv"
+# Save output to timestamped file
+timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+output_path = f"outputs/filtered_provisions_{timestamp}.csv"
 df.to_csv(output_path, index=False)
 print(f"\n Saved filtered provisions to {output_path}")
