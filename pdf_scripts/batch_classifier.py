@@ -6,19 +6,18 @@ import pandas as pd
 from dotenv import load_dotenv
 from openai import OpenAI
 
-# === Setup ===
+# API key
 load_dotenv()
 client = OpenAI(api_key=os.getenv("api_key"))
 
-# === Configuration ===
 filtered_csv_path = "outputs/filtered_provisions_20250526_155535.csv"
 matrix_path = "data/cso-matrix.txt"
 
-# === Load filtered provisions ===
+# Filtered provisions from provision_filter_llm.py
 df = pd.read_csv(filtered_csv_path)
 df = df[df["label"] == "provision"]
 
-# === Upload CSO Matrix to vector store ===
+# Upload CSO Matrix to vector store
 print(" Creating vector store...")
 vector_store = client.vector_stores.create(name="CSO_Matrix_Store")
 vector_store_id = vector_store.id
@@ -30,10 +29,10 @@ with open(matrix_path, "rb") as f:
         files=[f]
     )
 
-# === Provision classifier (using file search only) ===
+# Provision classifier (using file search only)
 def classify_provision(provision_text, vector_store_id):
     instructions = (
-        "You are a legal classification assistant trained in civil society regulation.\n"
+        "You are a legal classification assistant trained in civil society organizations (CSO) regulation.\n"
         "Use the File Search tool to read the uploaded CSO Matrix.\n"
         "Find the closest matching matrix concept for the following provision.\n\n"
 
