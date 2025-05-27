@@ -68,7 +68,7 @@ def classify_provision(provision_text, vector_store_id):
     print(f" Classified in {round(end_time - start_time, 2)}s")
     return response.output_text
 
-# === Classify all provisions ===
+# Classify all provisions
 results = []
 for i, row in df.iterrows():
     provision = row["text"]
@@ -87,7 +87,7 @@ for i, row in df.iterrows():
         })
     time.sleep(1.2)  # safe buffer
 
-# === Save results ===
+# Save results
 timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M")
 output_path = f"outputs/classified_provisions_{timestamp}.json"
 with open(output_path, "w", encoding="utf-8") as f:
