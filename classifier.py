@@ -99,6 +99,9 @@ def classify_provision_with_file_search(provision_text, matrix_path):
                                     at least one other institutional statement that if noncompliance occurs changes the DEONTIC
                                     assigned to some AIM for at least one actor, and (iii) affect the constraints and opportunities
                                     of actors responsible for monitoring the conformance of offenders.
+                      
+            
+                      
             Use the File Search tool to find the closest matching concept in the CSO Matrix.
             Find the closest matching concept in the legal provision. If no exact match exists, choose the conceptually closest category.
                       
