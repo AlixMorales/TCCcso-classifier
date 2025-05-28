@@ -38,7 +38,7 @@ def classify_provision(provision_text):
     start_time = time.time()
 
     response = client.responses.create(
-        model="gpt-4o",
+        model="gpt-4.1",
         instructions=(
             "You are a legal classification assistant trained in civil society regulation. "
             "Read the input prompt carefully and follow all formatting instructions. "
@@ -58,4 +58,65 @@ def classify_provision(provision_text):
     print(f"Total tokens: {usage.total_tokens}")
     print(f"Execution time: {duration} seconds\n")
 
+    return response.output_text
+
+def classify_provision_with_file_search(provision_text, matrix_path):
+    # Create vector store
+    print("Creating vector store...")
+    vector_store = client.vector_stores.create(name="CSO_Matrix_Vector_Store")
+    vector_store_id = vector_store.id
+
+    # Upload the CSO matrix
+    print("Uploading matrix...")
+    with open(matrix_path, "rb") as f:
+        client.vector_stores.file_batches.upload_and_poll(
+            vector_store_id=vector_store_id,
+            files=[f]
+        )
+
+    # API
+    print("\nClassifying provision...\n")
+    start_time = time.time()
+
+    response = client.responses.create(
+        model="gpt-4.1",
+        instructions=("""
+            You are a legal classification assistant trained in civil society regulation.
+            Read the input prompt carefully and follow all formatting instructions, do not speculate beyond the matrix provided.
+            
+            When prompted a legal provision, use the File Search tool to find the closest matching concept in the CSO Matrix.
+            Find the closest matching concept. If no exact match exists, choose the conceptually closest category.
+            
+            Classify the provision as either:
+            - Restrictive: if it imposes barriers or burdens on CSO activity.
+            - Permissive: if it enables, supports, or simplifies CSO activity.
+                      
+            Assign the provision to one of the four CSO Matrix subgroups: Formation, Governance, Operations, Resources.
+            Once assigned, do not change the category.
+                      
+            Always return only a JSON object like this:
+
+            {{
+            "provision": "the exact provision text provided",
+            "matched_matrix_provision": "Closest concept from matrix, exactly as it appears in the matrix.",
+            "subgroup": "Formation | Governance | Operations | Resources",
+            "type": "Restrictive | Permissive",
+            "explanation": "Brief legal reasoning and justification based on the matrix."
+            }}
+            """
+        ),
+        tools=[{
+            "type": "file_search",
+            "vector_store_ids": [vector_store_id]
+        }],
+        input=(
+            f"""
+            Classify the following provision using the CSO Matrix: {provision_text}
+            """
+        ),
+        temperature=0.2
+    )
+
+    end_time = time.time()
+    print(f"Completed in {round(end_time - start_time, 2)} seconds.")
     return response.output_text
