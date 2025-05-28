@@ -38,7 +38,7 @@ def classify_provision(provision_text):
     start_time = time.time()
 
     response = client.responses.create(
-        model="gpt-4.1",
+        model="gpt-4o",
         instructions=(
             "You are a legal classification assistant trained in civil society regulation. "
             "Read the input prompt carefully and follow all formatting instructions. "
@@ -62,12 +62,11 @@ def classify_provision(provision_text):
 
 def classify_provision_with_file_search(provision_text, matrix_path):
     # Create vector store
-    print("Creating vector store...")
     vector_store = client.vector_stores.create(name="CSO_Matrix_Vector_Store")
     vector_store_id = vector_store.id
 
     # Upload the CSO matrix
-    print("Uploading matrix...")
+    print("Matriz uploaded")
     with open(matrix_path, "rb") as f:
         client.vector_stores.file_batches.upload_and_poll(
             vector_store_id=vector_store_id,
@@ -75,7 +74,7 @@ def classify_provision_with_file_search(provision_text, matrix_path):
         )
 
     # API
-    print("\nClassifying provision...\n")
+    print("\nClassifying...\n")
     start_time = time.time()
 
     response = client.responses.create(
