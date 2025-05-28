@@ -10,7 +10,7 @@ from openai import OpenAI
 load_dotenv()
 client = OpenAI(api_key=os.getenv("api_key"))
 
-filtered_csv_path = "outputs/filtered_provisions_20250526_155535.csv"
+filtered_csv_path = "outputs/filtered_provisions_KenyaPublicOrder.csv"
 matrix_path = "data/cso-matrix.txt"
 
 # Filtered provisions from provision_filter_llm.py
