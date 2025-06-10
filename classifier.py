@@ -66,7 +66,7 @@ def classify_provision_with_file_search(provision_text, matrix_path):
     vector_store_id = vector_store.id
 
     # Upload the CSO matrix
-    print("Matriz uploaded")
+    print("Matrix uploaded")
     with open(matrix_path, "rb") as f:
         client.vector_stores.file_batches.upload_and_poll(
             vector_store_id=vector_store_id,
